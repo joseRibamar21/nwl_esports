@@ -1,7 +1,9 @@
+import {MagnifyingGlass} from 'phosphor-react';
+
 import './styles/main.css';
 import logoImg from './assets/logo.png';
 
-import {GAMES} from './utils/games';
+import { GAMES } from './utils/games';
 
 function App() {
   return (
@@ -12,19 +14,32 @@ function App() {
         Seu <span className='text-transparent bg-nlw-gradient bg-clip-text'>duo</span> esta aqui.
       </h1>
       <div className='grid grid-cols-6 gap-6'>
-        {GAMES.map(game => 
-        <a key={game.id} href='#' className='relative mt-16 rounded-lg overflow-hidden'>
-          <img src={game.cover} alt={game.name} />
-          <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0'>
-            <strong className='font-bold text-white block'>{game.name}</strong>
-            <span className='text-zinc-300 text-sm block mt-4'>{game.ads} anuncios</span>
-          </div>
-        </a>
+        {GAMES.map(game =>
+          <a key={game.id} href='#' className='relative mt-16 rounded-lg overflow-hidden'>
+            <img src={game.cover} alt={game.name} />
+            <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0'>
+              <strong className='font-bold text-white block'>{game.name}</strong>
+              <span className='text-zinc-300 text-sm block mt-4'>{game.ads} anuncios</span>
+            </div>
+          </a>
         )}
 
+      </div>
+
+      <div className='pt-1 bg-nlw-gradient self-stretch rounded-lg overflow-hidden mt-8 rounded-b-lg'>
+        <div className='bg-[#2A2634] px-8 py-6 flex justify-between items-center'>
+          <div>
+            <strong className='text-2xl text-white font-black block'>Não encontrou seu duo?</strong>
+            <span className='text-zinc-400 block'>Publique um anúncio para encontrar novos players</span>
+          </div>
+          <button className='py-3 px-4 bg-violet-500 text-white rounded hover:bg-violet-700 flex items-center gap-3'>
+            <MagnifyingGlass size={24}/>
+            Publicar anúncio
+          </button>
+        </div>
       </div>
     </div>
   )
 }
 
-export default App
+export default App;
