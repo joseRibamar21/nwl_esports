@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import * as Dialog from '@radix-ui/react-dialog';
+import * as Checkbox from '@radix-ui/react-checkbox';
 
 import './styles/main.css';
 import logoImg from './assets/logo.png';
 
 import { GameBanner } from './components/GameBanner';
 import CreatAdBanner from './components/CreatAdBanner';
-import { GameController } from "phosphor-react";
+import { Check, GameController } from "phosphor-react";
 import { Input } from "./components/Form/Input";
 
 interface Game {
@@ -57,7 +58,11 @@ function App() {
               <form className="mt-8 flex flex-col gap-4 ">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="game" className="font-semibold">Qual o game?</label>
-                  <Input id="game" placeholder="Selecione o game que deseja jogar" />
+                  <select className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500"
+                   id="game">
+                    <option  selected value="">Selecione o game que deseja jogar</option>
+                    <option value=""></option>
+                   </select>
                 </div>
 
                 <div className="flex flex-col gap-2">
@@ -110,9 +115,14 @@ function App() {
                 </div>
 
 
-                <div className="mt-2 flex gap-2 text-sm">
-                  <Input type="checkbox" />
-                  Costumo me conectar no chat de voz?
+                <div className="mt-2 items-end flex gap-2 text-sm">
+                  <Checkbox.Root className="w-6 h-6 p-1  text-sm bg-zinc-900">
+                    <Checkbox.Indicator>
+                      <Check className="w-4 h-4 text-emerald-400 "/>
+                    </Checkbox.Indicator>
+                  </Checkbox.Root>
+                  Costumo me conectar ao chat de voz
+                  
                 </div>
 
                 <footer className="mt-4 flex justify-end gap-4">
