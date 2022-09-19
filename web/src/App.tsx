@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import * as Dialog from '@radix-ui/react-dialog';
 import * as Checkbox from '@radix-ui/react-checkbox';
+import * as TougleGroup from '@radix-ui/react-toggle-group';
 
 import './styles/main.css';
 import logoImg from './assets/logo.png';
@@ -21,6 +22,7 @@ interface Game {
 
 function App() {
   const [games, setGames] = useState<Game[]>([]);
+  const [weekDays, setWeekDays] = useState<string[]>([]);
 
   useEffect(() => {
     fetch('http://localhost:3000/games').then(response => response.json()).then(
@@ -59,10 +61,13 @@ function App() {
                 <div className="flex flex-col gap-2">
                   <label htmlFor="game" className="font-semibold">Qual o game?</label>
                   <select className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500"
-                   id="game">
-                    <option  selected value="">Selecione o game que deseja jogar</option>
-                    <option value=""></option>
-                   </select>
+                    defaultValue=""
+                    id="game">
+                    <option disabled value="">Selecione o game que deseja jogar</option>
+                    {games.map(game =>
+                      <option value={game.id}>{game.title}</option>
+                    )}
+                  </select>
                 </div>
 
                 <div className="flex flex-col gap-2">
@@ -84,22 +89,24 @@ function App() {
                     <div className="flex flex-col gap-2 ">
                       <label htmlFor="weekDays">Quando costuma jogar?</label>
 
-                      <div className="grid grid-cols-4 gap-2">
-                        <button
-                          className="w-10 h-8 rounded bg-zinc-900 " title="Domingo">D</button>
-                        <button
-                          className="w-10 h-8 rounded bg-zinc-900 " title="Segunda">S</button>
-                        <button
-                          className="w-10 h-8 rounded bg-zinc-900 " title="Terça">T</button>
-                        <button
-                          className="w-10 h-8 rounded bg-zinc-900 " title="Quarta">Q</button>
-                        <button
-                          className="w-10 h-8 rounded bg-zinc-900 " title="Quinta">Q</button>
-                        <button
-                          className="w-10 h-8 rounded bg-zinc-900 " title="Sexta">S</button>
-                        <button
-                          className="w-10 h-8 rounded bg-zinc-900 " title="Sábado">S</button>
-                      </div>
+
+                      <TougleGroup.Root type="multiple" className="grid grid-cols-4 gap-2" value={weekDays}  onValueChange={setWeekDays}>
+                        <TougleGroup.Item value="1"
+                          className="w-10 h-8 rounded bg-zinc-900 " title="Domingo">D</TougleGroup.Item>
+                        <TougleGroup.Item value="2"
+                          className="w-10 h-8 rounded bg-zinc-900 " title="Segunda">S</TougleGroup.Item>
+                        <TougleGroup.Item value="3"
+                          className="w-10 h-8 rounded bg-zinc-900 " title="Terça">T</TougleGroup.Item>
+                        <TougleGroup.Item value="4"
+                          className="w-10 h-8 rounded bg-zinc-900 " title="Quarta">Q</TougleGroup.Item>
+                        <TougleGroup.Item value="5"
+                          className="w-10 h-8 rounded bg-zinc-900 " title="Quinta">Q</TougleGroup.Item>
+                        <TougleGroup.Item value="6"
+                          className="w-10 h-8 rounded bg-zinc-900 " title="Sexta">S</TougleGroup.Item>
+                        <TougleGroup.Item value="7"
+                          className="w-10 h-8 rounded bg-zinc-900 " title="Sábado">S</TougleGroup.Item>
+                      </TougleGroup.Root>
+
 
                     </div>
 
@@ -118,11 +125,11 @@ function App() {
                 <div className="mt-2 items-end flex gap-2 text-sm">
                   <Checkbox.Root className="w-6 h-6 p-1  text-sm bg-zinc-900">
                     <Checkbox.Indicator>
-                      <Check className="w-4 h-4 text-emerald-400 "/>
+                      <Check className="w-4 h-4 text-emerald-400 " />
                     </Checkbox.Indicator>
                   </Checkbox.Root>
                   Costumo me conectar ao chat de voz
-                  
+
                 </div>
 
                 <footer className="mt-4 flex justify-end gap-4">
