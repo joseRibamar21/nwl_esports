@@ -11,7 +11,7 @@ logo rode para iniciar com o SQLite:
 
 ## Migrates
 
-` npx migrate dev `
+` npx prisma migrate dev `
 
 ## Client
 
